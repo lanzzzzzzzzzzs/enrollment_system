@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CourseMap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="login-root">
+<div data-mount="sprite"></div>
+
+<div class="auth">
+  <section class="auth-left">
+    <a href="index.html" class="logo auth-logo" aria-label="CourseMap university portal">
+      <span class="logo-mark"><svg class="ic"><use href="#i-cap"/></svg></span>
+      <span class="logo-text"><span class="logo-name">CourseMap</span><span class="logo-sub">UNIVERSITY PORTAL</span></span>
+    </a>
+
+    <div class="auth-main">
+      <div class="auth-form-wrap" id="auth-wrap">
+       <div id="signin-view">
+        <span class="eyebrow">Secure portal access</span>
+        <h1>Welcome back.</h1>
+        <p class="auth-lede">Sign in to continue your academic journey with CourseMap.</p>
+
+        <div class="role-tabs" role="tablist" aria-label="Account type">
+          <button type="button" class="role-tab is-active" role="tab" aria-selected="true" data-role="student">Student</button>
+          <button type="button" class="role-tab" role="tab" aria-selected="false" data-role="admin">Admin</button>
+        </div>
+
+        <form id="login-form" novalidate>
+          <div class="auth-field">
+            <label for="login-id" id="id-label">Student ID</label>
+            <input id="login-id" name="id" type="text" autocomplete="username" placeholder="e.g. 2026-12345">
+          </div>
+
+          <div class="auth-field">
+            <div class="label-row">
+              <label for="login-pw">Password</label>
+              <a href="#" id="forgot">Forgot password?</a>
+            </div>
+            <div class="pw-wrap">
+              <input id="login-pw" name="password" type="password" autocomplete="current-password" placeholder="Enter your password">
+              <button type="button" class="pw-toggle" id="pw-toggle" aria-label="Show password" aria-pressed="false">
+                <svg class="ic"><use href="#i-eye"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <label class="check"><input type="checkbox" id="remember"> Keep me signed in on this device</label>
+
+          <p class="form-msg" id="form-msg" role="alert" hidden></p>
+
+          <button type="submit" class="auth-submit" id="submit">
+            <span id="submit-label">Sign in to student portal</span><svg class="ic"><use href="#i-arrow"/></svg>
+          </button>
+        </form>
+
+        <p class="auth-help" id="create-line">New student? <a href="#signup" id="create-account">Create an account</a></p>
+        <p class="auth-help auth-help-tight">Need help accessing your account? <a href="mailto:support@coursemap.example">Contact support</a></p>
+       </div>
+
+       <div id="signup-view" hidden>
+        <span class="eyebrow">New student account</span>
+        <h1 class="h1-sm">Create your account.</h1>
+        <p class="auth-lede">Set up your CourseMap account to plan your subjects and send your enrollment request.</p>
+
+        <form id="signup-form" novalidate>
+          <div class="field-row">
+            <div class="auth-field" data-field="last">
+              <label for="su-last">Last name</label>
+              <input id="su-last" type="text" autocomplete="family-name" placeholder="e.g. Santos">
+            </div>
+            <div class="auth-field" data-field="first">
+              <label for="su-first">First name</label>
+              <input id="su-first" type="text" autocomplete="given-name" placeholder="e.g. Maria">
+            </div>
+          </div>
+
+          <div class="auth-field" data-field="middle">
+            <label for="su-middle">Middle name (optional)</label>
+            <input id="su-middle" type="text" autocomplete="additional-name" placeholder="e.g. Clara">
+          </div>
+
+          <div class="auth-field" data-field="id">
+            <label for="su-id">Student ID</label>
+            <input id="su-id" type="text" autocomplete="off" placeholder="e.g. 2026-12345" maxlength="10">
+          </div>
+
+          <div class="auth-field" data-field="college">
+            <label for="su-college">College</label>
+            <select id="su-college"><option value="">Select your college</option></select>
+          </div>
+
+          <div class="field-row">
+            <div class="auth-field" data-field="program">
+              <label for="su-program">Program</label>
+              <select id="su-program" disabled><option value="">Choose college first</option></select>
+            </div>
+            <div class="auth-field" data-field="year">
+              <label for="su-year">Year level</label>
+              <select id="su-year"><option value="">Select year</option></select>
+            </div>
+          </div>
+
+          <div class="auth-field" data-field="status">
+            <label for="su-status">Student type</label>
+            <select id="su-status">
+              <option value="">Select type</option>
+              <option value="Regular">Regular</option>
+              <option value="Irregular">Irregular</option>
+            </select>
+          </div>
+
+          <div class="auth-field" data-field="file" id="su-file-field">
+            <label for="su-file">Curriculum checklist (PDF)</label>
+            <input id="su-file" class="checklist-file" type="file" accept="application/pdf,.pdf">
+            <small class="checklist-help">Upload your grade checklist so we know which subjects you already passed.</small>
+          </div>
+          <p id="su-first-year-note" class="checklist-help" hidden>As a 1st Year student, you do not need to upload a curriculum checklist because you do not have grades yet.</p>
+
+          <div class="auth-field" data-field="password">
+            <label for="su-pw">Password</label>
+            <div class="pw-wrap">
+              <input id="su-pw" type="password" autocomplete="new-password" placeholder="At least 8 characters">
+              <button type="button" class="pw-toggle" id="su-toggle" aria-label="Show password" aria-pressed="false">
+                <svg class="ic"><use href="#i-eye"/></svg>
+              </button>
+            </div>
+            <div class="pw-meter" id="pw-meter" aria-hidden="true"><i></i><i></i><i></i><i></i><span id="pw-meter-text"></span></div>
+          </div>
+
+          <div class="auth-field" data-field="confirm">
+            <label for="su-confirm">Confirm password</label>
+            <input id="su-confirm" type="password" autocomplete="new-password" placeholder="Re-enter your password">
+          </div>
+
+          <p class="form-msg" id="su-msg" role="alert" hidden></p>
+
+          <button type="submit" class="auth-submit" id="su-submit">
+            <span>Create account</span><svg class="ic"><use href="#i-arrow"/></svg>
+          </button>
+        </form>
+
+        <p class="auth-help">Already have an account? <a href="#" id="back-signin">Sign in</a></p>
+       </div>
+
+       <div id="signup-done" hidden>
+        <span class="done-icon"><svg class="ic"><use href="#i-check"/></svg></span>
+        <span class="eyebrow">Registration submitted</span>
+        <h1 class="h1-sm">Thanks, <span id="done-name"></span>.</h1>
+        <p class="auth-lede">An admin will check your curriculum checklist PDF first. Your account is created once it is approved, then you can sign in with the student ID below.</p>
+        <div class="id-card"><small>YOUR STUDENT ID</small><strong id="done-id"></strong><span id="done-meta"></span></div>
+        <button type="button" class="auth-submit" id="done-continue"><span>Back to sign in</span><svg class="ic"><use href="#i-arrow"/></svg></button>
+       </div>
+      </div>
+    </div>
+
+    <footer class="auth-foot">
+      <span>© <span id="year">2025</span> CourseMap University</span>
+      <a href="#">Privacy</a><a href="#">Security</a>
+    </footer>
+  </section>
+
+  <section class="auth-right" aria-hidden="false">
+    <div class="auth-right-top">
+      <span>ADMISSIONS 2025–2026</span>
+      <span class="live"><i></i>Applications open</span>
+    </div>
+
+    <div class="auth-right-main">
+      <span class="hero-icon"><svg class="ic"><use href="#i-cap"/></svg></span>
+      <span class="eyebrow gold">Plan with confidence</span>
+      <h2>Your path to campus starts here.</h2>
+      <p>From application to enrollment, everything you need is in one clear, guided place.</p>
+
+      <div class="journey">
+        <div class="journey-head"><small>YOUR JOURNEY</small><small>01 — 03</small></div>
+        <strong>Three steps to get started</strong>
+        <ol>
+          <li class="now"><span>1</span><div><b>Apply</b><small>Tell us about you</small></div></li>
+          <li><span>2</span><div><b>Plan</b><small>Choose your subjects</small></div></li>
+          <li><span>3</span><div><b>Enroll</b><small>Start your semester</small></div></li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="auth-quote">“Education is the beginning of every possibility.”</p>
+  </section>
+</div>
+
+</div>
+
+<div id="student-root">
+<div data-mount="sprite"></div>
+<div data-mount="topbar"></div>
+
+<div class="shell">
+  <div data-mount="sidebar"></div>
+
+  <main class="content">
+    <div id="flash" style="display:contents"></div>
+
+    <div class="view" data-view="overview">
+    <div class="page-header">
+      <div>
+        <span class="eyebrow">Student overview</span>
+        <h1>Student Dashboard</h1>
+        <p>Here’s where you stand for the upcoming semester and what you need to do next.</p>
+      </div>
+      <a href="#/planner" class="btn-primary">Continue planning <svg class="ic"><use href="#i-arrow"/></svg></a>
+    </div>
+
+    <!-- Stat cards are filled in by app.js -->
+    <section class="stats" id="stats" aria-label="Summary"></section>
+
+    <section class="progress-row">
+      <article class="card progress-card" id="progress-card"></article>
+
+      <div class="right-col">
+        <article class="deadline">
+          <span class="label">Important date</span>
+          <span class="date" id="deadline-date">August 18</span>
+          <strong>Enrollment deadline</strong>
+          <p id="deadline-note">Submit your proposed load early to allow time for adviser approval.</p>
+        </article>
+
+        <a href="#/schedule" class="card link-card">
+          <span class="link-icon"><svg class="ic"><use href="#i-calendar"/></svg></span>
+          <span class="step-text"><strong>Preview my schedule</strong><span>Check class days and times</span></span>
+          <svg class="ic"><use href="#i-arrow"/></svg>
+        </a>
+      </div>
+    </section>
+    </div>
+
+    <div class="view" data-view="planner" hidden>
+    <div class="page-header">
+      <div>
+        <span class="eyebrow">Enrollment planner</span>
+        <h1>Build your semester,<br>one subject at a time.</h1>
+        <p>We’ve checked your academic record and mapped the subjects you can take this semester.</p>
+      </div>
+      <div class="units-chip" id="units-chip"></div>
+    </div>
+
+    <div class="steps-bar" role="list" aria-label="Enrollment steps">
+      <div role="listitem">
+        <span class="step-dot"><svg class="ic"><use href="#i-check"/></svg></span>
+        <div><strong>Review subjects</strong><span>Eligibility checked</span></div>
+      </div>
+      <div role="listitem">
+        <span class="step-dot now">2</span>
+        <div><strong>Choose your load</strong><span id="steps-count">0 subjects selected</span></div>
+      </div>
+      <div role="listitem">
+        <span class="step-dot todo">3</span>
+        <div><strong>Submit request</strong><span>Adviser approval</span></div>
+      </div>
+    </div>
+
+    <div class="banner">
+      <span class="banner-icon"><svg class="ic"><use href="#i-spark"/></svg></span>
+      <span class="step-text">
+        <strong>Your eligibility is already checked</strong>
+        <span>We compare each subject’s prerequisites with your completed courses and year level.</span>
+      </span>
+      <span class="pill pill-white">✓ Completed prerequisite</span>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button type="button" class="tab" role="tab" aria-selected="false" data-tab="eligible">
+        Eligible for you <span id="count-eligible">0</span></button>
+      <button type="button" class="tab is-active" role="tab" aria-selected="true" data-tab="all">
+        All curriculum <span id="count-all">0</span></button>
+      <label class="search planner-search" aria-label="Search subjects">
+        <svg class="ic"><use href="#i-search"/></svg>
+        <input id="planner-search" type="search" placeholder="Search records..." autocomplete="off">
+      </label>
+    </div>
+
+    <!-- Subject cards are filled in by app.js (filtered by ?q= from the search box) -->
+    <section class="subject-grid" id="subject-grid"></section>
+    </div>
+
+    <div class="view" data-view="schedule" hidden>
+    <div class="page-header">
+      <div>
+        <span class="eyebrow">Weekly timetable</span>
+        <h1>My schedule</h1>
+        <p>A live preview based on the subjects currently in your enrollment plan.</p>
+      </div>
+      <a href="#/planner" class="btn-primary"><svg class="ic"><use href="#i-book"/></svg> Edit subjects</a>
+    </div>
+
+    <div class="no-conflict" id="conflict-banner"></div>
+
+    <div class="card filters">
+      <div class="field">
+        <label class="field-label" for="sy">School year</label>
+        <select class="select" id="sy"><option>2025–2026</option><option>2024–2025</option></select>
+      </div>
+      <div class="field">
+        <label class="field-label" for="sem">Semester</label>
+        <select class="select" id="sem"><option>First Semester</option><option>Second Semester</option></select>
+      </div>
+    </div>
+
+    <div class="card table-card">
+      <table class="data-table roomy">
+        <thead>
+          <tr>
+            <th style="width:4.2rem">#</th><th style="width:15rem">SUBJECT CODE</th><th>DESCRIPTION</th>
+            <th style="width:8rem">UNITS</th><th style="width:25rem">SCHEDULE</th>
+          </tr>
+        </thead>
+        <tbody id="plan-rows"></tbody>
+      </table>
+    </div>
+
+    <section class="card timetable-card" aria-labelledby="tt-title">
+      <div class="timetable-head">
+        <div>
+          <span class="eyebrow-sm">Weekly view</span>
+          <h2 id="tt-title">Class timetable</h2>
+        </div>
+        <button type="button" class="btn-outline" data-print>Print SER</button>
+      </div>
+
+      <div class="tt-scroll">
+        <div class="tt" id="tt"></div>
+      </div>
+    </section>
+    </div>
+
+    <div class="view" data-view="records" hidden>
+    <div class="page-header">
+      <div>
+        <span class="eyebrow">Academic history</span>
+        <h1>Enrollment records</h1>
+        <p>View your subjects, credited units, final grades, and academic standing by semester.</p>
+      </div>
+      <a href="#/planner" class="btn-primary">New enrollment <svg class="ic"><use href="#i-arrow"/></svg></a>
+    </div>
+
+    <section class="stats compact" aria-label="Academic summary">
+      <article class="card stat-card">
+        <span class="stat-label">Total units earned</span>
+        <span class="stat-value" id="sum-units">—</span>
+      </article>
+      <article class="card stat-card">
+        <span class="stat-label">Overall GWA</span>
+        <span class="stat-value" id="sum-gwa">—</span>
+      </article>
+      <article class="card stat-card">
+        <span class="stat-label">Academic standing</span>
+        <span class="stat-value" id="sum-standing">—</span>
+      </article>
+    </section>
+
+    <!-- Semester accordion is filled in by app.js -->
+    <section class="terms" id="terms" aria-label="Semesters"></section>
+
+    <div class="summary">
+      <span>Overall GWA:<b id="foot-gwa">—</b></span>
+      <span>Actual total units earned:<b id="foot-units">—</b></span>
+      <span>Academic units:<b id="foot-acad">—</b></span>
+      <span>Non-academic units:<b id="foot-nstp">—</b></span>
+    </div>
+    </div>
+  </main>
+</div>
+
+<div data-mount="drawer"></div>
+<div id="ser-print" aria-hidden="true"></div>
+</div>
+
+<div id="admin-root">
+<div data-mount="sprite"></div>
+<div data-mount="topbar"></div>
+<div class="shell">
+  <div data-mount="sidebar"></div>
+  <main class="content" id="main"></main>
+</div>
+<div id="modal-root"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

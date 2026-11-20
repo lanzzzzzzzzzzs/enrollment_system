@@ -1,0 +1,9 @@
+# no PDF files in the repo (student uploads and any other PDF)
+*.pdf
+
+# one-time helper that resets the admin password to a known value, never publish it
+api/reset_admin.php
+
+# OS files
+.DS_Store
+Thumbs.db
